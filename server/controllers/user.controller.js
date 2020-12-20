@@ -43,4 +43,11 @@ const userByID = async (req, res, next, id) => {
   }
 };
 
-export default { create, list, userByID };
+//read function retrieves a single user and removes sensitive information
+const read = (req, res) => {
+  req.profile.hashed_password = undefined;
+  req.profile.salt = undefined;
+  return res.json(req.profile);
+};
+
+export default { create, list, userByID, read };
