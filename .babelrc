@@ -8,6 +8,10 @@
                     "node": "current"
                 }
             }
-        ]
+        ],
+        "@babel/prese-react"
+    ],
+    "plugins": [
+        "react-hot-loader/babel"
     ]
 }
