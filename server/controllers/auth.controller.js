@@ -29,4 +29,11 @@ const signin = async (req, res) => {
   }
 };
 
-export default { signin };
+//this clears the response cookie containing the signed JWT
+const signout = (req, res) => {
+    res.clearCookie("t")
+    return res.status("200").json ({
+        message: "signed out"
+    })
+}
+export default { signin, signout};
