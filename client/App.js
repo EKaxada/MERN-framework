@@ -8,7 +8,7 @@ import { hot } from "react-hot-loader";
 const App = () => {
   return (
     <BrowserRouter>
-      <ThemeProvider>
+      <ThemeProvider theme={theme}>
         <MainRouter />
       </ThemeProvider>
     </BrowserRouter>
