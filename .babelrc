@@ -1,0 +1,13 @@
+{
+    "presets": [
+        [
+            "@babel/preset-env",
+            {
+                "targets": {
+                    //Instruct babel to compile against current version of node and allows use of expressions such as aync/await
+                    "node": "current"
+                }
+            }
+        ]
+    ]
+}
