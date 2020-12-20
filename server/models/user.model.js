@@ -2,28 +2,39 @@ import { stringify } from "json5";
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        trim: true,
-        required: "Name is required"
-    },
-    email: {
-        type: String,
-        trim: true,
-        unique: "Email already exists",
-        match: [/.+\@.+\..+/, 'Please fill a valid email address'],
-        required: "Email is required"
-    },
-    created: {
-        type: Date,
-        default: Date.now
-    },
-    updated: Date,
-    hashed_password: {
-        type: String,
-        required: "Password is required"
-    },
-    salt: String
-})
+  name: {
+    type: String,
+    trim: true,
+    required: "Name is required",
+  },
+  email: {
+    type: String,
+    trim: true,
+    unique: "Email already exists",
+    match: [/.+\@.+\..+/, "Please fill a valid email address"],
+    required: "Email is required",
+  },
+  created: {
+    type: Date,
+    default: Date.now,
+  },
+  updated: Date,
+  hashed_password: {
+    type: String,
+    required: "Password is required",
+  },
+  salt: String,
+});
 
-export default mongoose.model("User", userSchema)
+userSchema
+  .virtual("password")
+  .set(function (password) {
+    this._password = password;
+    this.salt = this.makesalt();
+    this.hashed_password = this.encryptedPassword(password);
+  })
+  .get(function () {
+    return this._password;
+  });
+
+export default mongoose.model("User", userSchema);
