@@ -10,6 +10,18 @@ import authRoutes from "./routes/auth.routes";
 import devBundle from "./devBundle";
 import path from "path";
 
+//modules to render react components to string
+import React from "react";
+import ReactDOMServer from "react-dom/server";
+
+//modules to match requested URL to frontend route declared in the main component
+import StaticRouter from "react-router-dom/StaticRouter";
+import MainRouter from "./../client/MainRouter";
+
+//modules to generate CSS styles for frontend components
+import { ServerStyleSheets, ThemeProvider } from "@material-ui/styles";
+import theme from "./../client/theme";
+
 const CURRENT_WORKING_DIR = process.cwd();
 const app = express();
 
@@ -32,6 +44,34 @@ app.use((err, req, res, next) => {
     res.status(400).json({ error: err.name + ": " + err.message });
     console.log(err);
   }
+});
+
+app.get("*", (req, res) => {
+  // 1. Generate CSS styles using Material-UI's ServerStyleSheets
+  const sheets = new ServerStyleSheets();
+  const context = {};
+  const markup = ReactDOMServer.renderToString(
+    sheets.collect(
+      <StaticRouter location={req.url} context={context}>
+        <ThemeProvider theme={theme}>
+          <MainRouter />
+        </ThemeProvider>
+      </StaticRouter>
+    )
+  );
+
+  // 2. Use renderToString to generate markup which renders components specific to the route requested
+  if (context.url) {
+    return res.redirect(303, context.url);
+  }
+  const css = sheets.toString();
+  res.status(200).send(
+    Template({
+      markup: markup,
+      css: css,
+    })
+  );
+  // 3. Return template with markup and CSS styles in the response
 });
 
 app.get("/", (req, res) => {
