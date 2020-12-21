@@ -9,8 +9,9 @@ const MainRouter = () => {
     <div>
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route path="/users" component={Users}/>
-        <Route path="/signup" component={Signup}/>
+        <Route path="/users" component={Users} />
+        <Route path="/signup" component={Signup} />
+        <Route path="/user/:userId" component={Profile} />
       </Switch>
     </div>
   );
