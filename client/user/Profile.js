@@ -1,7 +1,6 @@
 import {
   Avatar,
   Divider,
-  Link,
   List,
   ListItem,
   ListItemAvatar,
