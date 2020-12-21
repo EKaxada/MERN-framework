@@ -5,6 +5,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import dummy from "./../assets/images/dummy.jpg";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -26,6 +27,7 @@ export default function Home() {
   const classes = useStyles();
   return (
     <Card className={classes.card}>
+    <Link to="/users">Users</Link>
       <Typography variant="h6" className={classes.title}>
         Home Page
       </Typography>
