@@ -31196,7 +31196,9 @@ var __signature__ = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoader
 
 
 const App = () => {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.BrowserRouter, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_material_ui_styles__WEBPACK_IMPORTED_MODULE_4__.default, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_MainRouter__WEBPACK_IMPORTED_MODULE_1__.default, null)));
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.BrowserRouter, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_material_ui_styles__WEBPACK_IMPORTED_MODULE_4__.default, {
+    theme: _theme__WEBPACK_IMPORTED_MODULE_2__.default
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_MainRouter__WEBPACK_IMPORTED_MODULE_1__.default, null)));
 };
 
 const _default = (0,react_hot_loader__WEBPACK_IMPORTED_MODULE_5__.hot)(module)(App);
@@ -48204,7 +48206,7 @@ module.exports = function(hash, moduleMap, options) {
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => "a973239050fc2125d3d5"
+/******/ 		__webpack_require__.h = () => "3119fa2cb25e076c20ab"
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */
