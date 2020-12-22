@@ -27,6 +27,9 @@ const list = async (req, res) => {
   }
 };
 
+/**
+ * Load user and append to req.
+ */
 const userByID = async (req, res, next, id) => {
   try {
     let user = await User.findById(id);
