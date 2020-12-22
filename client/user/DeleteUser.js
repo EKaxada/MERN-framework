@@ -7,7 +7,7 @@ import {
   DialogTitle,
   IconButton,
 } from "@material-ui/core";
-import { DeleteIcon } from "@material-ui/icons";
+import DeleteIcon from "@material-ui/icons/Delete";
 import auth from "./../auth/auth-helper";
 import { remove } from "./api-user.js";
 import { Redirect } from "react-router-dom";
