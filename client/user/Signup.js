@@ -1,14 +1,18 @@
 import {
   Button,
   Card,
+  CardActions,
   CardContent,
   Dialog,
   DialogActions,
   DialogContent,
   DialogContentText,
+  DialogTitle,
   TextField,
   Typography,
 } from "@material-ui/core";
+import { Icon } from "@material-ui/core";
+import { create } from "./api-user.js";
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
@@ -17,7 +21,12 @@ const useStyles = makeStyles((theme) => ({
   card: {
     maxWidth: 600,
     margin: "auto",
+    textAlign: "center",
     marginTop: theme.spacing(5),
+    paddingBottom: theme.spacing(2),
+  },
+  error: {
+    verticalAlign: "middle",
   },
   title: {
     padding: `${theme.spacing(3)}px ${theme.spacing(2.5)}px
@@ -26,6 +35,15 @@ const useStyles = makeStyles((theme) => ({
   },
   media: {
     minHeight: 400,
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: 300,
+  },
+  submit: {
+    margin: "auto",
+    marginBottom: theme.spacing(2),
   },
 }));
 
@@ -67,26 +85,32 @@ export default function Signup() {
           <TextField
             id="name"
             label="Name"
-            className={classes.TextField}
-            values={values.name}
-            onchange={handleChange("name")}
+            className={classes.textField}
+            value={values.name}
+            onChange={handleChange("name")}
             margin="normal"
           />
-
           <br />
-
           <TextField
             id="email"
             type="email"
             label="Email"
-            className={classes.TextField}
+            className={classes.textField}
             value={values.email}
-            onchange={handleChange("email")}
+            onChange={handleChange("email")}
             margin="normal"
           />
-
           <br />
-
+          <TextField
+            id="password"
+            type="password"
+            label="Password"
+            className={classes.textField}
+            value={values.password}
+            onChange={handleChange("password")}
+            margin="normal"
+          />
+          <br />{" "}
           {values.error && (
             <Typography component="p" color="error">
               <Icon color="error" className={classes.error}>
@@ -107,10 +131,13 @@ export default function Signup() {
           </Button>
         </CardActions>
       </Card>
-
       <Dialog open={values.open} disableBackdropClick={true}>
         <DialogTitle>New Account</DialogTitle>
-        <DialogContentText>New account successfully created</DialogContentText>
+        <DialogContent>
+          <DialogContentText>
+            New account successfully created.
+          </DialogContentText>
+        </DialogContent>
         <DialogActions>
           <Link to="/signin">
             <Button color="primary" autoFocus="autoFocus" variant="contained">
