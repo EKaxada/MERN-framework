@@ -1,7 +1,6 @@
 import { AppBar, IconButton, Toolbar, Typography } from "@material-ui/core";
 import HomeIcon from "@material-ui/icons/Home";
 import React from "react";
-import { withRouter } from "react-router";
 import auth from "./../auth/auth-helper";
 import { Link, withRouter } from "react-router-dom";
 
