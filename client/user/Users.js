@@ -5,26 +5,24 @@ import {
   ListItem,
   ListItemAvatar,
   ListItemText,
+  ListItemSecondaryAction,
   Paper,
   Typography,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { ArrowForward, Person } from "@material-ui/icons";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { list } from "./api-user.js";
 
 const useStyles = makeStyles((theme) => ({
-  card: {
-    maxWidth: 600,
-    margin: "auto",
-    marginTop: theme.spacing(5),
-  },
+  root: theme.mixins.gutters({
+    padding: theme.spacing(1),
+    margin: theme.spacing(5),
+  }),
   title: {
-    padding: `${theme.spacing(3)}px ${theme.spacing(2.5)}px
-      ${theme.spacing(2)}px`,
+    margin: `${theme.spacing(4)}px 0 ${theme.spacing(2)}px`,
     color: theme.palette.openTitle,
-  },
-  media: {
-    minHeight: 400,
   },
 }));
 
@@ -32,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Users() {
   const classes = useStyles();
   const [users, setUsers] = useState([]);
+
   useEffect(() => {
     const abortController = newAbortController();
     const signal = abortController.signal;
