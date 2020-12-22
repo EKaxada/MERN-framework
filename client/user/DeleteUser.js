@@ -1,15 +1,24 @@
 import {
   Button,
   Dialog,
+  DialogActions,
   DialogContent,
   DialogContentText,
+  DialogTitle,
   IconButton,
 } from "@material-ui/core";
+import { DeleteIcon } from "@material-ui/icons";
+import auth from "./../auth/auth-helper";
+import { remove } from "./api-user.js";
+import { Redirect } from "react-router-dom";
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 
 export default function DeleteUser(props) {
   const [open, setOpen] = useState(false);
   const [redirect, setRedirect] = useState(false);
+
+  const jwt = auth.isAuthenticated();
 
   const clickButton = () => {
     setOpen(true);
