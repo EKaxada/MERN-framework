@@ -15,7 +15,7 @@ const Menu = withRouter(({ history }) => {
       <Typography>
         Yogera
         <Link to="/">
-          <IconButton aria-label="Home" style={IsActive(History, "/")}>
+          <IconButton aria-label="Home" style={isActive(History, "/")}>
             <HomeIcon />
           </IconButton>
         </Link>
