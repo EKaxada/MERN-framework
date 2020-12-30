@@ -4,7 +4,7 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
-import dummy from "./../assets/images/dummy.jpg";
+import unicornbikeImg from "./../assets/images/dummy.jpg";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -14,8 +14,9 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(5),
   },
   title: {
-    padding: `${theme.spacing(3)}px ${theme.spacing(2.5)}px
-    ${theme.spacing(2)}px`,
+    padding: `${theme.spacing(3)}px ${theme.spacing(2.5)}px ${theme.spacing(
+      2
+    )}px`,
     color: theme.palette.openTitle,
   },
   media: {
@@ -41,12 +42,12 @@ export default function Home() {
       </Typography>
       <CardMedia
         className={classes.media}
-        image={dummy}
-        title="Unicorn Bicylce"
+        image={unicornbikeImg}
+        title="Unicorn Bicycle"
       />
       <CardContent>
-        <Typography variant="body2" component="p">
-          Welcome to Yogera!
+        <Typography variant="body1" component="p">
+          Welcome to the MERN framework home page.
         </Typography>
       </CardContent>
     </Card>

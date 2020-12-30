@@ -1,17 +1,14 @@
-import {
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  Icon,
-  TextField,
-  Typography,
-} from "@material-ui/core";
 import React, { useState, useEffect } from "react";
+import Card from "@material-ui/core/Card";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
+import Icon from "@material-ui/core/Icon";
+import { makeStyles } from "@material-ui/core/styles";
 import auth from "./../auth/auth-helper";
 import { read, update } from "./api-user.js";
-import { makeStyles } from "@material-ui/core/styles";
-import { Link } from "react-router-dom";
 import { Redirect } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -23,9 +20,8 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(2),
   },
   title: {
-    padding: `${theme.spacing(3)}px ${theme.spacing(2.5)}px
-          ${theme.spacing(2)}px`,
-    color: theme.palette.openTitle,
+    margin: theme.spacing(2),
+    color: theme.palette.protectedTitle,
   },
   error: {
     verticalAlign: "middle",
@@ -34,9 +30,6 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
     width: 300,
-  },
-  media: {
-    minHeight: 400,
   },
   submit: {
     margin: "auto",
@@ -54,6 +47,7 @@ export default function EditProfile({ match }) {
     error: "",
     redirectToProfile: false,
   });
+  const jwt = auth.isAuthenticated();
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -77,12 +71,7 @@ export default function EditProfile({ match }) {
     };
   }, [match.params.userId]);
 
-  const handleChange = (name) => (event) => {
-    setValues({ ...values, [name]: event.target.value });
-  };
-
   const clickSubmit = () => {
-    const jwt = auth.isAuthenticated();
     const user = {
       name: values.name || undefined,
       email: values.email || undefined,
@@ -103,41 +92,39 @@ export default function EditProfile({ match }) {
         setValues({ ...values, userId: data._id, redirectToProfile: true });
       }
     });
-
-    if (values.redirectToProfile) {
-      return <Redirect to={"/user/" + values.userId} />;
-    }
+  };
+  const handleChange = (name) => (event) => {
+    setValues({ ...values, [name]: event.target.value });
   };
 
+  if (values.redirectToProfile) {
+    return <Redirect to={"/user/" + values.userId} />;
+  }
   return (
     <Card className={classes.card}>
       <CardContent>
         <Typography variant="h6" className={classes.title}>
-          Sign Up
+          Edit Profile
         </Typography>
         <TextField
           id="name"
           label="Name"
-          className={classes.TextField}
-          values={values.name}
-          onchange={handleChange("name")}
+          className={classes.textField}
+          value={values.name}
+          onChange={handleChange("name")}
           margin="normal"
         />
-
         <br />
-
         <TextField
           id="email"
           type="email"
           label="Email"
-          className={classes.TextField}
+          className={classes.textField}
           value={values.email}
-          onchange={handleChange("email")}
+          onChange={handleChange("email")}
           margin="normal"
         />
-
         <br />
-
         <TextField
           id="password"
           type="password"
@@ -147,9 +134,7 @@ export default function EditProfile({ match }) {
           onChange={handleChange("password")}
           margin="normal"
         />
-
-        <br />
-
+        <br />{" "}
         {values.error && (
           <Typography component="p" color="error">
             <Icon color="error" className={classes.error}>

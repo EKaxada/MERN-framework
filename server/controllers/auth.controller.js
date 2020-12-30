@@ -5,16 +5,30 @@ import config from "./../../config/config";
 
 const signin = async (req, res) => {
   try {
-    let user = await User.findOne({ email: req.body.email });
-    if (!user) return res.status("401").json({ error: "User not found" });
-    if (!user.authenticate(req, res.password)) {
+    let user = await User.findOne({
+      email: req.body.email,
+    });
+    if (!user)
+      return res.status("401").json({
+        error: "User not found",
+      });
+
+    if (!user.authenticate(req.body.password)) {
       return res.status("401").send({
-        error: "Email and password do not match",
+        error: "Email and password don't match.",
       });
     }
 
-    const token = jwt.sign({ _id: user._id }, config.jwtSecret);
-    res.cookie("t", token, { expire: new Date() + 9999 });
+    const token = jwt.sign(
+      {
+        _id: user._id,
+      },
+      config.jwtSecret
+    );
+
+    res.cookie("t", token, {
+      expire: new Date() + 9999,
+    });
 
     return res.json({
       token,
@@ -25,11 +39,12 @@ const signin = async (req, res) => {
       },
     });
   } catch (err) {
-    return res.status("401").json({ error: "Could not sign in" });
+    return res.status("401").json({
+      error: "Could not sign in",
+    });
   }
 };
 
-//this clears the response cookie containing the signed JWT
 const signout = (req, res) => {
   res.clearCookie("t");
   return res.status("200").json({
@@ -52,4 +67,10 @@ const hasAuthorization = (req, res, next) => {
   }
   next();
 };
-export default { signin, signout, requireSignin, hasAuthorization };
+
+export default {
+  signin,
+  signout,
+  requireSignin,
+  hasAuthorization,
+};

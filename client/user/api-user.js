@@ -9,8 +9,8 @@ const create = async (user) => {
       body: JSON.stringify(user),
     });
     return await response.json();
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    console.log(err);
   }
 };
 
@@ -21,8 +21,8 @@ const list = async (signal) => {
       signal: signal,
     });
     return await response.json();
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    console.log(err);
   }
 };
 
@@ -34,13 +34,12 @@ const read = async (params, credentials, signal) => {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        //Attach JWT authorization
         Authorization: "Bearer " + credentials.t,
       },
     });
     return await response.json();
-  } catch (error) {
-    console.log("error");
+  } catch (err) {
+    console.log(err);
   }
 };
 

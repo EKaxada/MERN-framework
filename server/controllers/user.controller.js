@@ -7,22 +7,11 @@ const create = async (req, res) => {
   try {
     await user.save();
     return res.status(200).json({
-      message: "Succesfully signed up!",
+      message: "Successfully signed up!",
     });
   } catch (err) {
     return res.status(400).json({
-      error: errorHandler.getErrorMessge(err),
-    });
-  }
-};
-
-const list = async (req, res) => {
-  try {
-    let users = await User.find().select("name email updated created");
-    res.json(users);
-  } catch (err) {
-    return res.status(400).json({
-      err: errorHandler.getErrorMessge(err),
+      error: errorHandler.getErrorMessage(err),
     });
   }
 };
@@ -41,16 +30,26 @@ const userByID = async (req, res, next, id) => {
     next();
   } catch (err) {
     return res.status("400").json({
-      error: "Could not retrieve user ",
+      error: "Could not retrieve user",
     });
   }
 };
 
-//read function retrieves a single user and removes sensitive information
 const read = (req, res) => {
   req.profile.hashed_password = undefined;
   req.profile.salt = undefined;
   return res.json(req.profile);
+};
+
+const list = async (req, res) => {
+  try {
+    let users = await User.find().select("name email updated created");
+    res.json(users);
+  } catch (err) {
+    return res.status(400).json({
+      error: errorHandler.getErrorMessage(err),
+    });
+  }
 };
 
 const update = async (req, res) => {
@@ -64,7 +63,7 @@ const update = async (req, res) => {
     res.json(user);
   } catch (err) {
     return res.status(400).json({
-      error: errorHandler.getErrorMessge(err),
+      error: errorHandler.getErrorMessage(err),
     });
   }
 };
@@ -78,9 +77,16 @@ const remove = async (req, res) => {
     res.json(deletedUser);
   } catch (err) {
     return res.status(400).json({
-      error: errorHandler.getErrorMessge(err),
+      error: errorHandler.getErrorMessage(err),
     });
   }
 };
 
-export default { create, list, userByID, read, update, remove };
+export default {
+  create,
+  userByID,
+  read,
+  list,
+  remove,
+  update,
+};

@@ -1,4 +1,3 @@
-import route from "color-convert/route";
 import express from "express";
 import authCtrl from "../controllers/auth.controller";
 

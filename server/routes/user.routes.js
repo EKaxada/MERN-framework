@@ -12,7 +12,6 @@ router
   .put(authCtrl.requireSignin, authCtrl.hasAuthorization, userCtrl.update)
   .delete(authCtrl.requireSignin, authCtrl.hasAuthorization, userCtrl.remove);
 
-//when app receives request having userID, it will execute userID controller
 router.param("userId", userCtrl.userByID);
 
 export default router;
